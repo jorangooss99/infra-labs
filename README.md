@@ -1,7 +1,7 @@
 # Infrastructure Automation - Lab assignments
 
-- Student name: NAME
-- Repository URL: <https://github.com/HoGentTIN/USERNAME/REPO>
+- Student name: Joran Goossens
+- Repository URL: (jorangooss99/infra-labs)[https://github.com/jorangooss99/infra-labs]
 
 This repository contains the lab assignments for the course Infrastructure Automation, which is part of the B[achelor Applied Computer Science programme](https://www.hogent.be/opleidingen/bachelors/toegepaste-informatica/) at [HOGENT](https://www.hogent.be/).
 
