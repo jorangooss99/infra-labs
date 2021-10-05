@@ -11,7 +11,14 @@ dockerlab                  : ok=12   changed=1    unreachable=0    failed=0    s
 
 You should now be able to ping the machine using `ping 192.168.56.20`
 
-![ping machine](images/img-2.png)
+```console
+❯ ping 192.168.56.20
+PING 192.168.56.20 (192.168.56.20): 56 data bytes
+64 bytes from 192.168.56.20: icmp_seq=0 ttl=64 time=0.581 ms
+64 bytes from 192.168.56.20: icmp_seq=1 ttl=64 time=0.491 ms
+64 bytes from 192.168.56.20: icmp_seq=2 ttl=64 time=0.404 ms
+64 bytes from 192.168.56.20: icmp_seq=3 ttl=64 time=0.558 ms
+```
 
 ### Portainer
 
@@ -29,13 +36,49 @@ Log in to the dockerlab VM using `vagrant ssh dockerlab`
 Run following commands to check if the docker instance is running correctly:
 
 - `systemctl status docker`
-  - ![img](images/img-3.png)
+  
+    ```console
+    vagrant@dockerlab:~$ systemctl status docker
+    ● docker.service - Docker Application Container Engine
+        Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+        Active: active (running) since Tue 2021-10-05 06:36:33 UTC; 3min 12s ago
+    TriggeredBy: ● docker.socket
+        Docs: https://docs.docker.com
+    Main PID: 830 (dockerd)
+    ```
+
 - `sudo ss -tlnp`
-  - ![img](images/img-4.png)
+  
+    ```console
+    vagrant@dockerlab:~$ sudo ss -tlnp
+    State    Recv-Q   Send-Q      Local Address:Port        Peer Address:Port   Process
+    LISTEN   0        4096              0.0.0.0:9000             0.0.0.0:*       users:(("docker-proxy",pid=1268,fd=4))
+    LISTEN   0        4096           172.30.0.1:9323             0.0.0.0:*       users:(("dockerd",pid=830,fd=21))
+    LISTEN   0        4096              0.0.0.0:111              0.0.0.0:*       users:(("rpcbind",pid=583,fd=4),("systemd",pid=1,fd=105))
+    LISTEN   0        4096            127.0.0.1:33777            0.0.0.0:*       users:(("containerd",pid=676,fd=10))
+    LISTEN   0        4096        127.0.0.53%lo:53               0.0.0.0:*       users:(("systemd-resolve",pid=585,fd=13))
+    LISTEN   0        128               0.0.0.0:22               0.0.0.0:*       users:(("sshd",pid=878,fd=3))
+    LISTEN   0        4096              0.0.0.0:8000             0.0.0.0:*       users:(("docker-proxy",pid=1280,fd=4))
+    LISTEN   0        4096                 [::]:111                 [::]:*       users:(("rpcbind",pid=583,fd=6),("systemd",pid=1,fd=107))
+    LISTEN   0        128                  [::]:22                  [::]:*       users:(("sshd",pid=878,fd=4))
+    ```
+
 - `docker ps`
-  - ![img](images/img-5.png)
+  
+    ```console
+    vagrant@dockerlab:~$ docker ps
+    CONTAINER ID   IMAGE                    COMMAND        CREATED        STATUS         PORTS                                                      NAMES
+    e3479750e1d9   portainer/portainer-ce   "/portainer"   21 hours ago   Up 4 minutes   0.0.0.0:8000->8000/tcp, 0.0.0.0:9000->9000/tcp, 9443/tcp   portainer
+    ```
+
 - `docker images`
-  - ![img](images/img-6.png)
+
+    ```console
+    vagrant@dockerlab:~$ docker images
+    REPOSITORY               TAG       IMAGE ID       CREATED       SIZE
+    portainer/portainer-ce   latest    8377e6877145   12 days ago   251MB
+    alpine                   latest    14119a10abf4   5 weeks ago   5.6MB
+    ```
 
 ## 1.2 Setting up our first containers
 
